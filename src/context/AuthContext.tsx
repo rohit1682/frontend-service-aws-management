@@ -1,0 +1,44 @@
+import { createContext, useContext, useMemo, useState } from 'react'
+import type { PropsWithChildren } from 'react'
+
+type AuthContextValue = {
+  isAuthenticated: boolean
+  login: (email: string, password: string) => Promise<void>
+  signup: (name: string, email: string, password: string) => Promise<void>
+  logout: () => void
+}
+
+const AuthContext = createContext<AuthContextValue | undefined>(undefined)
+
+export function AuthProvider({ children }: PropsWithChildren) {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+
+  async function login(_email: string, _password: string) {
+    await new Promise((r) => setTimeout(r, 400))
+    setIsAuthenticated(true)
+  }
+
+  async function signup(_name: string, _email: string, _password: string) {
+    await new Promise((r) => setTimeout(r, 500))
+    setIsAuthenticated(true)
+  }
+
+  function logout() {
+    setIsAuthenticated(false)
+  }
+
+  const value = useMemo<AuthContextValue>(
+    () => ({ isAuthenticated, login, signup, logout }),
+    [isAuthenticated]
+  )
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+}
+
+export function useAuth() {
+  const ctx = useContext(AuthContext)
+  if (!ctx) throw new Error('useAuth must be used within AuthProvider')
+  return ctx
+}
+
+

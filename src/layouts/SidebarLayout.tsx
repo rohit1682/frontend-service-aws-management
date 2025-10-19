@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import type { PropsWithChildren } from 'react'
-import NavOptions, { type NavItem } from '../components/NavOptions'
+import NavOptions, { type NavItem } from '../components/navigation/NavOptions'
+import { useAuth } from '../context/AuthContext'
 
 function SidebarLayout({ children }: PropsWithChildren) {
   const [open, setOpen] = useState(true)
+  const { isAuthenticated } = useAuth()
 
   return (
     <div className="min-h-screen relative bg-white">
@@ -52,9 +54,18 @@ function SidebarLayout({ children }: PropsWithChildren) {
           ] satisfies NavItem[]}
         />
         <div className="mt-auto pt-2 border-t border-slate-600/30">
-          <NavOptions
-            items={[{ to: '/my-account', label: 'My Account', icon: '⚙️' }] satisfies NavItem[]}
-          />
+          {isAuthenticated ? (
+            <NavOptions
+              items={[{ to: '/my-account', label: 'My Account', icon: '⚙️' }] satisfies NavItem[]}
+            />
+          ) : (
+            <NavOptions
+              items={[
+                { to: '/login', label: 'Log in', icon: '🔑' },
+                { to: '/signup', label: 'Sign up', icon: '📝' },
+              ] satisfies NavItem[]}
+            />
+          )}
         </div>
       </aside>
 

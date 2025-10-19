@@ -7,6 +7,9 @@ import Dashboard from './pages/Dashboard.tsx'
 import Accounts from './pages/Accounts.tsx'
 import Reports from './pages/Reports.tsx'
 import MyAccount from './pages/MyAccount.tsx'
+import Login from './pages/Login.tsx'
+import Signup from './pages/Signup.tsx'
+import { AuthProvider } from './context/AuthContext.tsx'
 
 const router = createBrowserRouter([
   {
@@ -17,12 +20,16 @@ const router = createBrowserRouter([
       { path: 'accounts', element: <Accounts /> },
       { path: 'reports', element: <Reports /> },
       { path: 'my-account', element: <MyAccount /> },
+      { path: 'login', element: <Login /> },
+      { path: 'signup', element: <Signup /> },
     ],
   },
 ])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )

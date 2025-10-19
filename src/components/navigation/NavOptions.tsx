@@ -32,5 +32,3 @@ function NavOptions({ items, className, onItemClick }: NavOptionsProps) {
 }
 
 export default NavOptions
-
-
