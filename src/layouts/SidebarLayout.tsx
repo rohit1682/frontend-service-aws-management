@@ -50,12 +50,10 @@ function SidebarLayout({ children }: PropsWithChildren) {
             { to: '/accounts', label: 'Accounts', icon: '👥' },
             { to: '/reports', label: 'Reports', icon: '📈' },
           ] satisfies NavItem[]}
-          onItemClick={() => setOpen(false)}
         />
         <div className="mt-auto pt-2 border-t border-slate-600/30">
           <NavOptions
             items={[{ to: '/my-account', label: 'My Account', icon: '⚙️' }] satisfies NavItem[]}
-            onItemClick={() => setOpen(false)}
           />
         </div>
       </aside>
@@ -72,9 +70,9 @@ function SidebarLayout({ children }: PropsWithChildren) {
       <main
         className={
           (open
-            ? 'translate-x-64 w-[calc(100%-16rem)] '
-            : 'translate-x-0 w-full ')
-          + 'transition-[transform,width] duration-300 ease-out px-4 sm:px-6 relative z-10 box-border'
+            ? 'translate-x-64 w-[calc(100%-16rem)] pl-10 '
+            : 'translate-x-0 w-full pl-20 ')
+          + 'transition-[transform,width] duration-300 ease-out pr-4 sm:pr-6 relative z-10 box-border'
         }
       >
         {children}
