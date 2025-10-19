@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react'
-import { NavLink } from 'react-router-dom'
+import NavOptions, { type NavItem } from '../components/NavOptions'
 
 function SidebarLayout({ children }: PropsWithChildren) {
   return (
@@ -9,21 +9,18 @@ function SidebarLayout({ children }: PropsWithChildren) {
           <div className="w-7 h-7 grid place-items-center rounded-md bg-slate-800" aria-hidden>🏢</div>
           <div className="font-semibold">Your Company</div>
         </div>
-        <nav className="flex flex-col gap-1">
-          <NavLink to="/" end className={({ isActive }) => isActive ? 'px-3 py-2 rounded-lg bg-slate-800 text-white' : 'px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-600/20'}>
-            Dashboard
-          </NavLink>
-          <NavLink to="/accounts" className={({ isActive }) => isActive ? 'px-3 py-2 rounded-lg bg-slate-800 text-white' : 'px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-600/20'}>
-            Accounts
-          </NavLink>
-          <NavLink to="/reports" className={({ isActive }) => isActive ? 'px-3 py-2 rounded-lg bg-slate-800 text-white' : 'px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-600/20'}>
-            Reports
-          </NavLink>
-        </nav>
+        <NavOptions
+          className="flex flex-col gap-1"
+          items={[
+            { to: '/', label: 'Dashboard', end: true, icon: '📊' },
+            { to: '/accounts', label: 'Accounts', icon: '👥' },
+            { to: '/reports', label: 'Reports', icon: '📈' },
+          ] satisfies NavItem[]}
+        />
         <div className="mt-auto pt-2 border-t border-slate-600/30">
-          <NavLink to="/my-account" className={({ isActive }) => isActive ? 'px-3 py-2 rounded-lg bg-slate-800 text-white' : 'px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-600/20'}>
-            My Account
-          </NavLink>
+          <NavOptions
+            items={[{ to: '/my-account', label: 'My Account', icon: '⚙️' }] satisfies NavItem[]}
+          />
         </div>
       </aside>
       <main className="p-6">
