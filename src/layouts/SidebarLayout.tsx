@@ -69,7 +69,14 @@ function SidebarLayout({ children }: PropsWithChildren) {
       )}
 
       {/* Content area; add left padding on large screens so content is not covered */}
-      <main className={(open ? 'pl-64 ' : 'pl-0 ') + 'p-4 sm:p-6 relative z-10 transition-all duration-300'}>
+      <main
+        className={
+          (open
+            ? 'translate-x-64 w-[calc(100%-16rem)] '
+            : 'translate-x-0 w-full ')
+          + 'transition-[transform,width] duration-300 ease-out px-4 sm:px-6 relative z-10 box-border'
+        }
+      >
         {children}
       </main>
     </div>
