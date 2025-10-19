@@ -45,14 +45,23 @@ function SidebarLayout({ children }: PropsWithChildren) {
           </button>
         </div>
 
-        <NavOptions
-          className="flex flex-col gap-1"
-          items={[
-            { to: '/', label: 'Dashboard', end: true, icon: '📊' },
-            { to: '/accounts', label: 'Accounts', icon: '👥' },
-            { to: '/reports', label: 'Reports', icon: '📈' },
-          ] satisfies NavItem[]}
-        />
+        {isAuthenticated ? (
+          <NavOptions
+            className="flex flex-col gap-1"
+            items={[
+              { to: '/dashboard', label: 'Dashboard', icon: '📊' },
+              { to: '/accounts', label: 'Accounts', icon: '👥' },
+              { to: '/reports', label: 'Reports', icon: '📈' },
+            ] satisfies NavItem[]}
+          />
+        ) : (
+          <NavOptions
+            className="flex flex-col gap-1"
+            items={[
+              { to: '/', label: 'Home', end: true, icon: '🏠' },
+            ] satisfies NavItem[]}
+          />
+        )}
         <div className="mt-auto pt-2 border-t border-slate-600/30">
           {isAuthenticated ? (
             <NavOptions
