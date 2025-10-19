@@ -1,14 +1,48 @@
+import { useState } from 'react'
 import type { PropsWithChildren } from 'react'
 import NavOptions, { type NavItem } from '../components/NavOptions'
 
 function SidebarLayout({ children }: PropsWithChildren) {
+  const [open, setOpen] = useState(false)
+
   return (
-    <div className="min-h-screen grid grid-cols-[260px_1fr]">
-      <aside className="flex flex-col gap-3 p-4 bg-slate-900 text-slate-200">
+    <div className="min-h-screen relative bg-white">
+      {/* Floating hamburger opener */}
+      {!open && (
+        <button
+          type="button"
+          aria-label="Open menu"
+          aria-expanded={open}
+          aria-controls="app-sidebar"
+          onClick={() => setOpen(true)}
+          className="fixed top-4 left-4 z-40 jiggle-hover rounded-xl bg-slate-900 text-white shadow-lg px-3 py-2 transition-transform duration-200 hover:scale-110"
+        >
+          <span className="text-xl">☰</span>
+        </button>
+      )}
+
+      {/* Sidebar panel */}
+      <aside
+        id="app-sidebar"
+        className={
+          (open ? 'translate-x-0' : '-translate-x-full') +
+          ' fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 will-change-transform bg-slate-900 text-slate-200 p-4 flex flex-col gap-3'
+        }
+      >
         <div className="flex items-center gap-2 pb-4 border-b border-slate-600/30">
           <div className="w-7 h-7 grid place-items-center rounded-md bg-slate-800" aria-hidden>🏢</div>
-          <div className="font-semibold">Your Company</div>
+          <div className="font-semibold text-sm sm:text-base truncate">Your Company</div>
+          {/* Close (X) button */}
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setOpen(false)}
+            className="ml-auto inline-flex items-center justify-center w-8 h-8 rounded-md bg-slate-800 text-slate-200 hover:bg-slate-700 transition-colors"
+          >
+            ×
+          </button>
         </div>
+
         <NavOptions
           className="flex flex-col gap-1"
           items={[
@@ -16,14 +50,26 @@ function SidebarLayout({ children }: PropsWithChildren) {
             { to: '/accounts', label: 'Accounts', icon: '👥' },
             { to: '/reports', label: 'Reports', icon: '📈' },
           ] satisfies NavItem[]}
+          onItemClick={() => setOpen(false)}
         />
         <div className="mt-auto pt-2 border-t border-slate-600/30">
           <NavOptions
             items={[{ to: '/my-account', label: 'My Account', icon: '⚙️' }] satisfies NavItem[]}
+            onItemClick={() => setOpen(false)}
           />
         </div>
       </aside>
-      <main className="p-6">
+
+      {/* Backdrop when open (for small screens) */}
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[1px] lg:hidden"
+        />
+      )}
+
+      {/* Content area; add left padding on large screens so content is not covered */}
+      <main className={(open ? 'pl-64 ' : 'pl-0 ') + 'p-4 sm:p-6 relative z-10 transition-all duration-300'}>
         {children}
       </main>
     </div>
