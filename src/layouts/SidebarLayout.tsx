@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react'
 import NavOptions, { type NavItem } from '../components/NavOptions'
 
 function SidebarLayout({ children }: PropsWithChildren) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
 
   return (
     <div className="min-h-screen relative bg-white">
