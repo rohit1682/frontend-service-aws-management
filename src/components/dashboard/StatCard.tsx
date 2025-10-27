@@ -11,7 +11,7 @@ function StatCard({
 }: StatCardProps) {
   return (
     <div 
-      className={`bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 animate-slide-in-up border border-gray-100 hover:border-gray-200 cursor-pointer group ${className}`}
+      className={`bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-slide-in-up border border-gray-100 hover:border-gray-200 cursor-pointer group ${className}`}
       style={{ animationDelay }}
     >
       <div className="flex items-center justify-between">
@@ -19,7 +19,7 @@ function StatCard({
           <p className="text-sm font-medium text-gray-600 mb-1">{title}</p>
           <p className="text-3xl font-bold text-gray-900">{value}</p>
         </div>
-        <div className={`w-12 h-12 ${iconBgColor} rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110`}>
+        <div className={`w-12 h-12 ${iconBgColor} rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105`}>
           <div className={`w-6 h-6 ${iconColor} transition-colors duration-300`}>
             {icon}
           </div>

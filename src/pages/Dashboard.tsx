@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import StatCard from '../components/dashboard/StatCard'
 import WelcomeCard from '../components/dashboard/WelcomeCard'
 import ActionCard, { QuickActionButton, ActivityItem } from '../components/dashboard/ActionCard'
+import LogoImage from '../assets/Logo.png'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -25,7 +26,7 @@ function Dashboard() {
           <WelcomeCard
             title="Welcome to Managed Serviced Portal"
             subtitle="Monitor your AWS infrastructure, manage accounts, and generate comprehensive reports from your unified dashboard."
-            logoUrl="/Logo.png"
+            logoUrl={LogoImage}
           />
         </div>
 

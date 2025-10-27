@@ -3,6 +3,7 @@ import type { PropsWithChildren } from 'react'
 import NavOptions from '../components/navigation/NavOptions'
 import { useAuth } from '../context/AuthContext'
 import { type NavItem } from '../types'
+import LogoImage from '../assets/Logo.png'
 
 function SidebarLayout({ children }: PropsWithChildren) {
   const [open, setOpen] = useState(true)
@@ -33,7 +34,7 @@ function SidebarLayout({ children }: PropsWithChildren) {
         }
       >
         <div className="flex items-center gap-2 pb-4 border-b border-slate-600/30">
-          <img src="/Logo.png" alt="Company Logo" className="w-7 h-7 object-contain" />
+          <img src={LogoImage} alt="Company Logo" className="w-7 h-7 object-contain" />
           <div className="font-semibold text-sm sm:text-base truncate">Workmates</div>
           {/* Close (X) button */}
           <button

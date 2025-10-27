@@ -146,6 +146,10 @@ body {
 }
 
 /* Enhanced scale animations */
+.hover\:scale-\[1\.01\]:hover {
+  transform: scale(1.01);
+}
+
 .hover\:scale-\[1\.02\]:hover {
   transform: scale(1.02);
 }
@@ -154,17 +158,39 @@ body {
   transform: scale(1.05);
 }
 
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
 .hover\:scale-110:hover {
   transform: scale(1.1);
 }
 
 /* Enhanced card hover effects */
+.group:hover .group-hover\:scale-105 {
+  transform: scale(1.05);
+}
+
 .group:hover .group-hover\:scale-110 {
   transform: scale(1.1);
 }
 
+.group:hover .group-hover\:rotate-2 {
+  transform: rotate(2deg);
+}
+
 .group:hover .group-hover\:rotate-3 {
   transform: rotate(3deg);
+}
+
+/* Smooth card hover animation */
+.card-hover-effect {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover-effect:hover {
+  transform: scale(1.03) translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Smooth transitions for all hover effects */

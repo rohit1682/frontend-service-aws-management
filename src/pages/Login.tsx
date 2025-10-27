@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import TextField from '../components/auth/TextField'
 import PrimaryButton from '../components/auth/PrimaryButton'
+import LogoImage from '../assets/Logo.png'
 
 function Login() {
   const { login } = useAuth()
@@ -42,7 +43,7 @@ function Login() {
         <div className="relative z-10 flex flex-col justify-center px-16 text-white">
           <div className="max-w-md">
             <div className="mb-8">
-              <img src="/Logo.png" alt="Workmates Logo" className="w-16 h-16 mb-6 opacity-90" />
+              <img src={LogoImage} alt="Workmates Logo" className="w-16 h-16 mb-6 opacity-90" />
               <h1 className="text-4xl font-bold mb-4 animate-fade-in-up">
                 Welcome to Workmates
               </h1>
@@ -75,7 +76,7 @@ function Login() {
           <div className="bg-white rounded-2xl shadow-2xl p-8 animate-slide-in-right">
             <div className="text-center mb-8">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-slate-700 to-gray-800 rounded-2xl mb-6 animate-bounce">
-                <img src="/Logo.png" alt="Workmates Logo" className="w-10 h-10" />
+                <img src={LogoImage} alt="Workmates Logo" className="w-10 h-10" />
               </div>
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome back</h2>
               <p className="text-gray-600">Sign in to your Workmates account</p>
