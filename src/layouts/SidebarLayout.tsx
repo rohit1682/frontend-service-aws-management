@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext'
 
 function SidebarLayout({ children }: PropsWithChildren) {
   const [open, setOpen] = useState(true)
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, logout } = useAuth()
 
   return (
     <div className="min-h-screen relative bg-white">
@@ -32,8 +32,8 @@ function SidebarLayout({ children }: PropsWithChildren) {
         }
       >
         <div className="flex items-center gap-2 pb-4 border-b border-slate-600/30">
-          <div className="w-7 h-7 grid place-items-center rounded-md bg-slate-800" aria-hidden>🏢</div>
-          <div className="font-semibold text-sm sm:text-base truncate">Your Company</div>
+          <img src="/Logo.png" alt="Company Logo" className="w-7 h-7 object-contain" />
+          <div className="font-semibold text-sm sm:text-base truncate">Workmates</div>
           {/* Close (X) button */}
           <button
             type="button"
@@ -52,6 +52,7 @@ function SidebarLayout({ children }: PropsWithChildren) {
               { to: '/dashboard', label: 'Dashboard', icon: '📊' },
               { to: '/accounts', label: 'Accounts', icon: '👥' },
               { to: '/reports', label: 'Reports', icon: '📈' },
+              { to: '/user-onboard', label: 'User Onboard', icon: '🚀' },
             ] satisfies NavItem[]}
           />
         ) : (
@@ -65,7 +66,10 @@ function SidebarLayout({ children }: PropsWithChildren) {
         <div className="mt-auto pt-2 border-t border-slate-600/30">
           {isAuthenticated ? (
             <NavOptions
-              items={[{ to: '/my-account', label: 'My Account', icon: '⚙️' }] satisfies NavItem[]}
+              items={[
+                { to: '/my-account', label: 'My Account', icon: '⚙️' },
+                { label: 'Logout', icon: '🚪', onClick: logout }
+              ] satisfies NavItem[]}
             />
           ) : (
             <NavOptions
