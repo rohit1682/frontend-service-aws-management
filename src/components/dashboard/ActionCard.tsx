@@ -42,7 +42,7 @@ function ActionCard({
   
   return (
     <div 
-      className={`bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 ${animationClass} border border-gray-100 hover:border-gray-200 group ${className}`}
+      className={`bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 ${animationClass} border border-gray-100 hover:border-gray-200 group cursor-pointer ${className}`}
       style={{ animationDelay }}
     >
       <div className="flex items-center mb-6">
@@ -74,13 +74,22 @@ type QuickActionButtonProps = {
   icon: string
   color: string
   onClick?: () => void
+  href?: string
 }
 
-function QuickActionButton({ label, icon, color, onClick }: QuickActionButtonProps) {
+function QuickActionButton({ label, icon, color, onClick, href }: QuickActionButtonProps) {
+  const handleClick = () => {
+    if (onClick) {
+      onClick()
+    } else if (href) {
+      window.location.href = href
+    }
+  }
+
   return (
     <button 
-      onClick={onClick}
-      className="w-full text-left p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-300 flex items-center group/button hover:shadow-md hover:scale-[1.02]"
+      onClick={handleClick}
+      className="w-full text-left p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-300 flex items-center group/button hover:shadow-md hover:scale-[1.02] cursor-pointer"
     >
       <span className={`${color} mr-3 text-lg group-hover/button:scale-110 transition-transform duration-300`}>{icon}</span>
       <span className="group-hover/button:text-gray-800 transition-colors duration-300">{label}</span>

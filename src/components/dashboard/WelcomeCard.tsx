@@ -7,7 +7,7 @@ type WelcomeCardProps = {
 
 function WelcomeCard({ title, subtitle, logoUrl, className = '' }: WelcomeCardProps) {
   return (
-    <div className={`bg-white rounded-3xl shadow-2xl p-8 md:p-12 animate-fade-in-up border border-gray-100 hover:shadow-3xl transition-all duration-500 transform hover:scale-[1.02] ${className}`}>
+    <div className={`bg-white rounded-3xl shadow-2xl p-8 md:p-12 animate-fade-in-up border border-gray-100 hover:shadow-3xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 cursor-pointer group ${className}`}>
       <div className="text-center">
         {/* Logo and Welcome */}
         <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-slate-700 to-gray-800 rounded-2xl mb-6 animate-bounce hover:scale-110 transition-transform duration-300">

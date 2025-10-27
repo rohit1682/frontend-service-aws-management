@@ -153,3 +153,23 @@ body {
 .hover\:scale-\[1\.05\]:hover {
   transform: scale(1.05);
 }
+
+.hover\:scale-110:hover {
+  transform: scale(1.1);
+}
+
+/* Enhanced card hover effects */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+.group:hover .group-hover\:rotate-3 {
+  transform: rotate(3deg);
+}
+
+/* Smooth transitions for all hover effects */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
