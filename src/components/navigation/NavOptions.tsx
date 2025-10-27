@@ -16,8 +16,8 @@ type NavOptionsProps = {
 }
 
 function NavOptions({ items, className, onItemClick }: NavOptionsProps) {
-  const base = 'block px-3 py-2 rounded-lg text-slate-300 transition-all duration-200 ease-out hover:text-white hover:bg-slate-600/20 hover:scale-105'
-  const active = 'block px-3 py-2 rounded-lg bg-slate-800 text-white transition-all duration-200 ease-out hover:scale-105'
+  const base = 'block w-full px-3 py-2 rounded-lg text-slate-300 transition-all duration-200 ease-out hover:text-white hover:bg-slate-600/20 hover:scale-105'
+  const active = 'block w-full px-3 py-2 rounded-lg bg-slate-800 text-white transition-all duration-200 ease-out hover:scale-105'
   
   return (
     <nav className={className}>
@@ -39,7 +39,7 @@ function NavOptions({ items, className, onItemClick }: NavOptionsProps) {
           )
         } else {
           return (
-            <button key={key} className={base} onClick={handleClick}>
+            <button key={key} className={base + ' text-left'} onClick={handleClick}>
               <span className="inline-flex items-center gap-2">
                 {icon ? <span className="text-lg leading-none" aria-hidden>{icon}</span> : null}
                 <span>{label}</span>
