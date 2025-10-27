@@ -4,7 +4,6 @@ import type { PropsWithChildren } from 'react'
 type AuthContextValue = {
   isAuthenticated: boolean
   login: (email: string, password: string) => Promise<void>
-  signup: (name: string, email: string, password: string) => Promise<void>
   logout: () => void
 }
 
@@ -18,17 +17,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setIsAuthenticated(true)
   }
 
-  async function signup(_name: string, _email: string, _password: string) {
-    await new Promise((r) => setTimeout(r, 500))
-    setIsAuthenticated(true)
-  }
 
   function logout() {
     setIsAuthenticated(false)
   }
 
   const value = useMemo<AuthContextValue>(
-    () => ({ isAuthenticated, login, signup, logout }),
+    () => ({ isAuthenticated, login, logout }),
     [isAuthenticated]
   )
 

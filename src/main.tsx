@@ -10,7 +10,6 @@ import Reports from './pages/Reports.tsx'
 import MyAccount from './pages/MyAccount.tsx'
 import UserOnboard from './pages/UserOnboard.tsx'
 import Login from './pages/Login.tsx'
-import Signup from './pages/Signup.tsx'
 import { AuthProvider } from './context/AuthContext.tsx'
 
 const router = createBrowserRouter([
@@ -25,7 +24,6 @@ const router = createBrowserRouter([
       { path: 'user-onboard', element: <UserOnboard /> },
       { path: 'my-account', element: <MyAccount /> },
       { path: 'login', element: <Login /> },
-      { path: 'signup', element: <Signup /> },
     ],
   },
 ])

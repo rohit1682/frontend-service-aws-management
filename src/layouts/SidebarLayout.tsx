@@ -75,7 +75,6 @@ function SidebarLayout({ children }: PropsWithChildren) {
             <NavOptions
               items={[
                 { to: '/login', label: 'Log in', icon: '🔑' },
-                { to: '/signup', label: 'Sign up', icon: '📝' },
               ] satisfies NavItem[]}
             />
           )}
