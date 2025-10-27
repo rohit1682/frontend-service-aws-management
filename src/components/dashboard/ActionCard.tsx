@@ -1,31 +1,4 @@
-import { ReactNode } from 'react'
-
-type ActionItem = {
-  id: string
-  label: string
-  icon: string
-  color: string
-  onClick?: () => void
-}
-
-type ActivityItem = {
-  id: string
-  title: string
-  time: string
-  status: 'success' | 'info' | 'warning' | 'error'
-}
-
-type ActionCardProps = {
-  title: string
-  subtitle: string
-  icon: ReactNode
-  iconBgColor: string
-  iconColor: string
-  animationDirection: 'left' | 'right'
-  animationDelay?: string
-  className?: string
-  children?: ReactNode
-}
+import { type ActionCardProps, type QuickActionButtonProps, type ActivityItemProps } from '../../types'
 
 function ActionCard({ 
   title, 
@@ -69,14 +42,6 @@ function ActionCard({
 }
 
 // Quick Action Button Component
-type QuickActionButtonProps = {
-  label: string
-  icon: string
-  color: string
-  onClick?: () => void
-  href?: string
-}
-
 function QuickActionButton({ label, icon, color, onClick, href }: QuickActionButtonProps) {
   const handleClick = () => {
     if (onClick) {
@@ -98,12 +63,6 @@ function QuickActionButton({ label, icon, color, onClick, href }: QuickActionBut
 }
 
 // Activity Item Component
-type ActivityItemProps = {
-  title: string
-  time: string
-  status: 'success' | 'info' | 'warning' | 'error'
-}
-
 function ActivityItem({ title, time, status }: ActivityItemProps) {
   const statusColors = {
     success: 'bg-green-50 border-green-400 text-green-400',

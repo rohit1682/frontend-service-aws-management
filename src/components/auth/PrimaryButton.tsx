@@ -1,6 +1,5 @@
-import type { ButtonHTMLAttributes, PropsWithChildren } from 'react'
-
-type PrimaryButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
+import type { PropsWithChildren } from 'react'
+import { type PrimaryButtonProps } from '../../types'
 
 function PrimaryButton({ children, className, ...props }: PropsWithChildren<PrimaryButtonProps>) {
   return (

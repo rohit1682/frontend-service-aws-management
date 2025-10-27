@@ -1,14 +1,4 @@
-import { ReactNode } from 'react'
-
-type StatCardProps = {
-  title: string
-  value: string | number
-  icon: ReactNode
-  iconBgColor: string
-  iconColor: string
-  animationDelay?: string
-  className?: string
-}
+import { type StatCardProps } from '../../types'
 
 function StatCard({ 
   title, 

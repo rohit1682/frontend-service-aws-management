@@ -1,9 +1,4 @@
-type WelcomeCardProps = {
-  title: string
-  subtitle: string
-  logoUrl: string
-  className?: string
-}
+import { type WelcomeCardProps } from '../../types'
 
 function WelcomeCard({ title, subtitle, logoUrl, className = '' }: WelcomeCardProps) {
   return (

@@ -1,10 +1,4 @@
-import type { InputHTMLAttributes } from 'react'
-
-type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
-  label: string
-  id: string
-  error?: string | null
-}
+import { type TextFieldProps } from '../../types'
 
 function TextField({ label, id, error, className, ...props }: TextFieldProps) {
   return (

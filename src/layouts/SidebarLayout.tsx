@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import type { PropsWithChildren } from 'react'
-import NavOptions, { type NavItem } from '../components/navigation/NavOptions'
+import NavOptions from '../components/navigation/NavOptions'
 import { useAuth } from '../context/AuthContext'
+import { type NavItem } from '../types'
 
 function SidebarLayout({ children }: PropsWithChildren) {
   const [open, setOpen] = useState(true)

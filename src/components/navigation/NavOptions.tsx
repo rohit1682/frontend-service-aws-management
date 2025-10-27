@@ -1,19 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import type { ReactNode } from 'react'
-
-export type NavItem = {
-  to?: string
-  label: string
-  end?: boolean
-  icon?: ReactNode
-  onClick?: () => void
-}
-
-type NavOptionsProps = {
-  items: NavItem[]
-  className?: string
-  onItemClick?: () => void
-}
+import { type NavItem, type NavOptionsProps } from '../../types'
 
 function NavOptions({ items, className, onItemClick }: NavOptionsProps) {
   const base = 'block w-full px-3 py-2 rounded-lg text-slate-300 transition-all duration-200 ease-out hover:text-white hover:bg-slate-600/20 hover:scale-105'

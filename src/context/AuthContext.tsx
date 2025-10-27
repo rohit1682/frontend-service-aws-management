@@ -1,11 +1,6 @@
 import { createContext, useContext, useMemo, useState } from 'react'
 import type { PropsWithChildren } from 'react'
-
-type AuthContextValue = {
-  isAuthenticated: boolean
-  login: (email: string, password: string) => Promise<void>
-  logout: () => void
-}
+import { type AuthContextValue } from '../types'
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined)
 
