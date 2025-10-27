@@ -15,7 +15,7 @@ function ActionCard({
   
   return (
     <div 
-      className={`bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 ${animationClass} border border-gray-100 hover:border-gray-200 group cursor-pointer ${className}`}
+      className={`relative bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 ${animationClass} border border-gray-100 hover:border-gray-200 group cursor-pointer ${className}`}
       style={{ animationDelay }}
     >
       <div className="flex items-center mb-6">
@@ -36,7 +36,7 @@ function ActionCard({
       )}
       
       {/* Hover effect overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"></div>
     </div>
   )
 }
