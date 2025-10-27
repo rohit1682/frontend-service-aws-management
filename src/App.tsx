@@ -12,6 +12,11 @@ function App() {
     return <Navigate to="/login" replace />
   }
 
+  // If user is authenticated and on root path, redirect to dashboard
+  if (isAuthenticated && location.pathname === '/') {
+    return <Navigate to="/dashboard" replace />
+  }
+
   // If user is authenticated, show the full layout with sidebar
   if (isAuthenticated) {
     return (
