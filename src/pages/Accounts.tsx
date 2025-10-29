@@ -17,7 +17,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 // Skeleton Component
 const AccountCardSkeleton = () => (
-    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-lg animate-pulse">
+    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-lg animate-pulse hover:shadow-xl transition-all duration-300">
         <div className="flex items-center space-x-4">
             <div className="w-12 h-12 bg-slate-200 rounded-lg"></div>
             <div className="flex-1 space-y-2">
@@ -55,7 +55,7 @@ const AccountCard: React.FC<{
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="bg-white rounded-2xl border border-slate-200 p-6 shadow-lg hover:shadow-xl transition-all duration-300 group"
+            className="bg-white rounded-2xl border border-slate-200 p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 group cursor-pointer"
         >
             <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
@@ -77,13 +77,13 @@ const AccountCard: React.FC<{
                 <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                     <button
                         onClick={() => onEdit(account)}
-                        className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+                        className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-all duration-300 hover:scale-110 transform"
                     >
                         <Edit className="w-4 h-4" />
                     </button>
                     <button
                         onClick={() => onDelete(account)}
-                        className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors"
+                        className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-all duration-300 hover:scale-110 transform"
                     >
                         <Trash2 className="w-4 h-4" />
                     </button>
@@ -104,13 +104,23 @@ const DeleteConfirmDialog: React.FC<{
 }> = ({ isOpen, onClose, onConfirm, account }) => {
     if (!isOpen || !account) return null;
 
+    const handleBackdropClick = (e: React.MouseEvent) => {
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     return (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-start justify-center z-50 p-4 overflow-y-auto"
+            onClick={handleBackdropClick}
+        >
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                className="bg-white rounded-3xl p-8 w-full max-w-md"
+                className="bg-white rounded-3xl p-8 w-full max-w-md my-8"
+                onClick={(e) => e.stopPropagation()}
             >
                 <div className="text-center">
                     <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -158,6 +168,14 @@ const Accounts: React.FC = () => {
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
+
+    // Utility function to scroll to top smoothly
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
 
     const handleCreate = async (accountData: {
         accountName: string;
@@ -225,11 +243,13 @@ const Accounts: React.FC = () => {
     const handleEdit = (account: Account) => {
         setSelectedAccount(account);
         setIsEditDialogOpen(true);
+        scrollToTop();
     };
 
     const handleDeleteClick = (account: Account) => {
         setSelectedAccount(account);
         setIsDeleteDialogOpen(true);
+        scrollToTop();
     };
 
     return (
@@ -238,7 +258,7 @@ const Accounts: React.FC = () => {
             <div className="w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
                 <div className="w-full space-y-8">
                     {/* Header */}
-                    <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-lg">
+                    <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-lg animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">
@@ -249,8 +269,11 @@ const Accounts: React.FC = () => {
                                 </p>
                             </div>
                             <button
-                                onClick={() => setIsCreateDialogOpen(true)}
-                                className="mt-4 sm:mt-0 bg-slate-800 text-white px-6 py-3 rounded-xl hover:bg-slate-900 transition-colors flex items-center space-x-2"
+                                onClick={() => {
+                                    setIsCreateDialogOpen(true);
+                                    scrollToTop();
+                                }}
+                                className="mt-4 sm:mt-0 bg-slate-800 text-white px-6 py-3 rounded-xl hover:bg-slate-900 transition-all duration-300 flex items-center space-x-2 hover:scale-105 transform hover:shadow-lg"
                             >
                                 <Plus className="w-5 h-5" />
                                 <span>Add Account</span>
@@ -259,7 +282,7 @@ const Accounts: React.FC = () => {
                     </div>
 
                     {/* Search */}
-                    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-lg">
+                    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-lg animate-slide-in-up" style={{ animationDelay: '0.3s' }}>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <div className="flex-1 relative">
                                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
@@ -268,7 +291,7 @@ const Accounts: React.FC = () => {
                                     placeholder="Search accounts by name, ID, or region..."
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                                    className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-slate-500 focus:border-transparent transition-all duration-300 hover:shadow-md focus:shadow-lg"
                                 />
                             </div>
                         </div>
@@ -278,15 +301,17 @@ const Accounts: React.FC = () => {
                     </div>
 
                     {/* Accounts List */}
-                    <div className="space-y-4">
+                    <div className="space-y-4 animate-slide-in-up" style={{ animationDelay: '0.5s' }}>
                         {isLoading ? (
                             <div className="space-y-4">
                                 {[...Array(5)].map((_, i) => (
-                                    <AccountCardSkeleton key={i} />
+                                    <div key={i} className="animate-slide-in-up" style={{ animationDelay: `${0.7 + i * 0.1}s` }}>
+                                        <AccountCardSkeleton />
+                                    </div>
                                 ))}
                             </div>
                         ) : filteredAccounts.length === 0 ? (
-                            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 text-center">
+                            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 text-center animate-slide-in-up" style={{ animationDelay: '0.7s' }}>
                                 <Building2 className="w-12 h-12 text-slate-400 mx-auto mb-4" />
                                 <h3 className="text-lg font-semibold text-slate-900 mb-2">No Accounts Found</h3>
                                 <p className="text-slate-600 mb-4">
@@ -297,8 +322,11 @@ const Accounts: React.FC = () => {
                                 </p>
                                 {!search && (
                                     <button
-                                        onClick={() => setIsCreateDialogOpen(true)}
-                                        className="bg-slate-800 text-white px-6 py-3 rounded-xl hover:bg-slate-900 transition-colors"
+                                        onClick={() => {
+                                            setIsCreateDialogOpen(true);
+                                            scrollToTop();
+                                        }}
+                                        className="bg-slate-800 text-white px-6 py-3 rounded-xl hover:bg-slate-900 transition-colors hover:scale-105 transform"
                                     >
                                         Create Account
                                     </button>
@@ -307,12 +335,13 @@ const Accounts: React.FC = () => {
                         ) : (
                             <AnimatePresence>
                                 {filteredAccounts.map((account, index) => (
-                                    <AccountCard
-                                        key={`${account.AccountID}-${index}`}
-                                        account={account}
-                                        onEdit={handleEdit}
-                                        onDelete={handleDeleteClick}
-                                    />
+                                    <div key={`${account.AccountID}-${index}`} className="animate-slide-in-up" style={{ animationDelay: `${0.7 + index * 0.1}s` }}>
+                                        <AccountCard
+                                            account={account}
+                                            onEdit={handleEdit}
+                                            onDelete={handleDeleteClick}
+                                        />
+                                    </div>
                                 ))}
                             </AnimatePresence>
                         )}

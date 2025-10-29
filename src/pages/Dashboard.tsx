@@ -3,6 +3,7 @@ import StatCard from '../components/dashboard/StatCard'
 import WelcomeCard from '../components/dashboard/WelcomeCard'
 import ActionCard, { QuickActionButton, ActivityItem } from '../components/dashboard/ActionCard'
 import LogoImage from '../assets/Logo.png'
+import { STAT_CARDS_DATA, RECENT_ACTIVITIES_DATA, STAT_CARD_CONFIGS } from '../constants/dashboard'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -33,43 +34,31 @@ function Dashboard() {
         {/* Quick Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <StatCard
-            title="Total Accounts"
-            value="12"
-            icon={
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-              </svg>
-            }
-            iconBgColor="bg-blue-100"
-            iconColor="text-blue-600"
-            animationDelay="0.6s"
+            title={STAT_CARDS_DATA[0].title}
+            value={STAT_CARDS_DATA[0].value}
+            icon={STAT_CARD_CONFIGS.totalAccounts.icon}
+            iconBgColor={STAT_CARD_CONFIGS.totalAccounts.iconBgColor}
+            iconColor={STAT_CARD_CONFIGS.totalAccounts.iconColor}
+            animationDelay={STAT_CARD_CONFIGS.totalAccounts.animationDelay}
           />
 
           <StatCard
-            title="Active Users"
-            value="247"
-            icon={
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-            }
-            iconBgColor="bg-green-100"
-            iconColor="text-green-600"
-            animationDelay="0.8s"
+            title={STAT_CARDS_DATA[1].title}
+            value={STAT_CARDS_DATA[1].value}
+            icon={STAT_CARD_CONFIGS.activeUsers.icon}
+            iconBgColor={STAT_CARD_CONFIGS.activeUsers.iconBgColor}
+            iconColor={STAT_CARD_CONFIGS.activeUsers.iconColor}
+            animationDelay={STAT_CARD_CONFIGS.activeUsers.animationDelay}
           />
 
           <div className="md:col-span-2 lg:col-span-2">
             <StatCard
-              title="Last Account Onboarded"
-              value="bankify"
-              icon={
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                </svg>
-              }
-              iconBgColor="bg-yellow-100"
-              iconColor="text-yellow-600"
-              animationDelay="1.0s"
+              title={STAT_CARDS_DATA[2].title}
+              value={STAT_CARDS_DATA[2].value}
+              icon={STAT_CARD_CONFIGS.lastAccountOnboarded.icon}
+              iconBgColor={STAT_CARD_CONFIGS.lastAccountOnboarded.iconBgColor}
+              iconColor={STAT_CARD_CONFIGS.lastAccountOnboarded.iconColor}
+              animationDelay={STAT_CARD_CONFIGS.lastAccountOnboarded.animationDelay}
             />
           </div>
         </div>
@@ -122,21 +111,14 @@ function Dashboard() {
             animationDirection="right"
             animationDelay="0.8s"
           >
-            <ActivityItem
-              title="EC2 instance started"
-              time="2 minutes ago"
-              status="success"
-            />
-            <ActivityItem
-              title="New user added to account"
-              time="1 hour ago"
-              status="info"
-            />
-            <ActivityItem
-              title="Cost threshold reached"
-              time="3 hours ago"
-              status="warning"
-            />
+            {RECENT_ACTIVITIES_DATA.map((activity) => (
+              <ActivityItem
+                key={activity.id}
+                title={activity.title}
+                time={activity.time}
+                status={activity.status}
+              />
+            ))}
           </ActionCard>
         </div>
       </div>
