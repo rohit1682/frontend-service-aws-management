@@ -1,7 +1,4 @@
-import { useAuth } from '../context/AuthContext'
-
 function UserOnboard() {
-  const { logout } = useAuth()
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
