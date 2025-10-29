@@ -3,7 +3,7 @@ import StatCard from '../components/dashboard/StatCard'
 import WelcomeCard from '../components/dashboard/WelcomeCard'
 import ActionCard, { QuickActionButton, ActivityItem } from '../components/dashboard/ActionCard'
 import LogoImage from '../assets/Logo.png'
-import { STAT_CARDS_DATA, RECENT_ACTIVITIES_DATA, STAT_CARD_CONFIGS } from '../constants/dashboard'
+import { STAT_CARDS_DATA, RECENT_ACTIVITIES_DATA, STAT_CARD_CONFIGS } from '../constants/dashboard.tsx'
 
 function Dashboard() {
   const navigate = useNavigate()

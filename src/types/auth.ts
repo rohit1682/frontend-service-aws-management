@@ -1,6 +1,7 @@
 // Auth Context Types
 export type AuthContextValue = {
   isAuthenticated: boolean
+  isInitialized: boolean
   login: (email: string, password: string) => Promise<void>
   logout: () => void
 }
