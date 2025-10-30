@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 interface User {
   email: string
@@ -40,8 +40,10 @@ const saveSession = (user: User) => {
   }
   
   try {
-    sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(sessionData))
+    // Save to localStorage for persistence across page refreshes
     localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(sessionData))
+    // Mark the browser session as active
+    markBrowserSession()
   } catch (error) {
     console.error('Failed to save session:', error)
   }
@@ -49,18 +51,15 @@ const saveSession = (user: User) => {
 
 const loadSession = (): SessionData | null => {
   try {
-    // Try sessionStorage first (cleared on tab close)
-    let stored = sessionStorage.getItem(SESSION_STORAGE_KEY)
-    
-    // If not in sessionStorage, try localStorage (persists across sessions)
-    if (!stored) {
-      stored = localStorage.getItem(SESSION_STORAGE_KEY)
-      
-      // If found in localStorage, restore to sessionStorage
-      if (stored) {
-        sessionStorage.setItem(SESSION_STORAGE_KEY, stored)
-      }
+    // Check if this is a new browser session (new tab/window or browser restart)
+    if (isNewBrowserSession()) {
+      // Clear any existing session data for new browser sessions
+      clearSession()
+      return null
     }
+    
+    // Load from localStorage (persists across page refreshes)
+    const stored = localStorage.getItem(SESSION_STORAGE_KEY)
     
     if (stored) {
       const sessionData: SessionData = JSON.parse(stored)
@@ -83,8 +82,8 @@ const loadSession = (): SessionData | null => {
 
 const clearSession = () => {
   try {
-    sessionStorage.removeItem(SESSION_STORAGE_KEY)
     localStorage.removeItem(SESSION_STORAGE_KEY)
+    sessionStorage.removeItem(SESSION_MARKER_KEY)
   } catch (error) {
     console.error('Failed to clear session:', error)
   }
@@ -141,23 +140,26 @@ export const logoutUser = createAsyncThunk(
   }
 )
 
-// Tab close detection
-let isTabClosing = false
+// Session persistence strategy:
+// - Use localStorage for persistence across page refreshes
+// - Use sessionStorage to detect new browser sessions
+// - Clear session only on explicit logout or when browser session ends
 
-const handleBeforeUnload = () => {
-  isTabClosing = true
-  // Clear session on tab close
-  clearSession()
+const SESSION_MARKER_KEY = 'auth_session_marker'
+
+const isNewBrowserSession = (): boolean => {
+  // If sessionStorage doesn't have our marker, it's a new browser session
+  return !sessionStorage.getItem(SESSION_MARKER_KEY)
 }
 
-const handlePageShow = () => {
-  isTabClosing = false
+const markBrowserSession = () => {
+  // Mark this browser session as active
+  sessionStorage.setItem(SESSION_MARKER_KEY, 'active')
 }
 
-// Set up tab close detection
+// Initialize session marker when the module loads
 if (typeof window !== 'undefined') {
-  window.addEventListener('beforeunload', handleBeforeUnload)
-  window.addEventListener('pageshow', handlePageShow)
+  markBrowserSession()
 }
 
 const authSlice = createSlice({
