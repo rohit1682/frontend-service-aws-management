@@ -12,10 +12,10 @@ export const usePageLoader = () => {
     // Show loader when route changes
     dispatch(setLoading(true))
     
-    // Hide loader after a longer delay to make it more visible
+    // Hide loader after a short delay
     const timer = setTimeout(() => {
       dispatch(setLoading(false))
-    }, 1000) // Increased to 1 second for better visibility
+    }, 300) // Quick 300ms loader for smooth transitions
 
     return () => clearTimeout(timer)
   }, [location.pathname, dispatch])
