@@ -1,12 +1,20 @@
 import { Outlet, Navigate, useLocation } from 'react-router-dom'
 import SidebarLayout from './layouts/SidebarLayout'
 import { useAuth } from './hooks/useAuth'
+import { usePageLoader } from './hooks/usePageLoader'
 import ScrollToTop from './components/ScrollToTop'
+import Loader from './utils/Loader'
 import './App.css'
 
 function App() {
   const { isAuthenticated } = useAuth()
+  const { isLoading } = usePageLoader()
   const location = useLocation()
+
+  // Show loader during page transitions
+  if (isLoading) {
+    return <Loader fullScreen message="Loading page..." />
+  }
 
   // If user is not authenticated and not on login page, redirect to login
   if (!isAuthenticated && location.pathname !== '/login') {
