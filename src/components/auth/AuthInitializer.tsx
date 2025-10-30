@@ -14,7 +14,7 @@ const AuthInitializer: React.FC<AuthInitializerProps> = ({ children }) => {
   }, [initialize])
 
   if (!isInitialized) {
-    return <Loader fullScreen message="Loading..." />
+    return <Loader fullScreen />
   }
 
   return <>{children}</>

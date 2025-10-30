@@ -13,7 +13,7 @@ function App() {
 
   // Show loader during page transitions
   if (isLoading) {
-    return <Loader fullScreen message="Loading page..." />
+    return <Loader fullScreen />
   }
 
   // If user is not authenticated and not on login page, redirect to login
