@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { PropsWithChildren } from 'react'
 import NavOptions from '../components/navigation/NavOptions'
 import { useAuthWithNavigation } from '../hooks/useAuthWithNavigation'
-import { type NavItem } from '../types'
+import { type NavItem } from '../types/typeExports'
 import LogoImage from '../assets/Logo.png'
 
 function SidebarLayout({ children }: PropsWithChildren) {

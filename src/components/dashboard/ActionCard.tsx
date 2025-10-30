@@ -1,4 +1,4 @@
-import { type ActionCardProps, type QuickActionButtonProps, type ActivityItemProps } from '../../types'
+import { type ActionCardProps, type QuickActionButtonProps, type ActivityItemProps } from '../../types/typeExports'
 
 function ActionCard({ 
   title, 

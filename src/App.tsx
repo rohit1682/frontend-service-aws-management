@@ -3,7 +3,7 @@ import SidebarLayout from './layouts/SidebarLayout'
 import { useAuth } from './hooks/useAuth'
 import { usePageLoader } from './hooks/usePageLoader'
 import ScrollToTop from './components/ScrollToTop'
-import Loader from './utils/Loader'
+import Loader from './utils/Loader/Loader'
 import './App.css'
 
 function App() {

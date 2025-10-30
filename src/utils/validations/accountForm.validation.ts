@@ -1,5 +1,5 @@
-import type { AccountFormData, AccountFormErrors } from '../../interfaces/forms'
-import type { ValidationResult, FormValidationConfig } from '../../interfaces/common'
+import type { AccountFormData, AccountFormErrors } from '../../interfaces/forms/formInterfaceExports'
+import type { ValidationResult, FormValidationConfig } from '../../interfaces/common/commonInterfaceExports'
 import { validateForm, commonValidators } from './common.validation'
 
 /**

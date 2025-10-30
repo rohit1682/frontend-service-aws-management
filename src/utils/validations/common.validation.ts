@@ -1,4 +1,4 @@
-import type { ValidationResult, ValidationRule, FormValidationConfig } from '../../interfaces/common'
+import type { ValidationResult, ValidationRule, FormValidationConfig } from '../../interfaces/common/commonInterfaceExports'
 
 /**
  * Generic form validation utility

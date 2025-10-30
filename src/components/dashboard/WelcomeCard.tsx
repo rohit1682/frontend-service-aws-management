@@ -1,4 +1,4 @@
-import { type WelcomeCardProps } from '../../types'
+import { type WelcomeCardProps } from '../../types/typeExports'
 
 function WelcomeCard({ title, subtitle, logoUrl, className = '' }: WelcomeCardProps) {
   return (

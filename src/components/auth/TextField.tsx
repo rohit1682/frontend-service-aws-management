@@ -1,4 +1,4 @@
-import { type TextFieldProps } from '../../types'
+import { type TextFieldProps } from '../../types/typeExports'
 
 function TextField({ label, id, error, className, ...props }: TextFieldProps) {
   return (

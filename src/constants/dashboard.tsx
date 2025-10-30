@@ -1,5 +1,5 @@
 
-import { type StatCardProps, type ActivityItem } from '../types'
+import { type StatCardProps, type ActivityItem } from '../types/typeExports'
 
 // Stat Cards Data
 export const STAT_CARDS_DATA: Omit<StatCardProps, 'icon' | 'iconBgColor' | 'iconColor' | 'animationDelay'>[] = [

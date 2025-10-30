@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react'
-import { type PrimaryButtonProps } from '../../types'
+import { type PrimaryButtonProps } from '../../types/typeExports'
 
 function PrimaryButton({ children, className, ...props }: PropsWithChildren<PrimaryButtonProps>) {
   return (

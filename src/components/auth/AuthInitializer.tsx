@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useAuth } from '../../hooks/useAuth'
-import Loader from '../../utils/Loader'
+import Loader from '../../utils/Loader/Loader'
 
 interface AuthInitializerProps {
   children: React.ReactNode

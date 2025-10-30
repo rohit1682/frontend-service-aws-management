@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { type NavOptionsProps } from '../../types'
+import { type NavOptionsProps } from '../../types/typeExports'
 
 function NavOptions({ items, className, onItemClick }: NavOptionsProps) {
   const base = 'block w-full px-3 py-2 rounded-lg text-slate-300 transition-all duration-200 ease-out hover:text-white hover:bg-slate-600/20 hover:scale-105'

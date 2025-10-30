@@ -1,4 +1,4 @@
-import { type StatCardProps } from '../../types'
+import { type StatCardProps } from '../../types/typeExports'
 
 function StatCard({ 
   title, 
