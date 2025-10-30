@@ -1,30 +1,28 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useState, useEffect } from 'react'
+import { useAuthWithNavigation } from '../hooks/useAuthWithNavigation'
 import TextField from '../components/auth/TextField'
 import PrimaryButton from '../components/auth/PrimaryButton'
 import LogoImage from '../assets/Logo.png'
 
 function Login() {
-  const { login } = useAuth()
-  const navigate = useNavigate()
+  const { login, isLoading, error, clearError } = useAuthWithNavigation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    // Clear any existing errors when component mounts
+    clearError()
+  }, [clearError])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setError(null)
-    setLoading(true)
-    try {
-      await login(email, password)
-      navigate('/dashboard')
-    } catch (err) {
-      setError('Invalid credentials. Please try again.')
-    } finally {
-      setLoading(false)
+    clearError()
+    
+    if (!email.trim() || !password.trim()) {
+      return
     }
+    
+    await login(email, password)
   }
 
   return (
@@ -117,10 +115,10 @@ function Login() {
 
               <PrimaryButton 
                 type="submit" 
-                disabled={loading}
+                disabled={isLoading || !email.trim() || !password.trim()}
                 className="w-full py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
               >
-                {loading ? (
+                {isLoading ? (
                   <div className="flex items-center justify-center">
                     <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

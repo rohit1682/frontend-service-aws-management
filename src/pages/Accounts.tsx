@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { useAccounts } from '../hooks/useAccounts';
 import type { Account } from '../constants/accounts';
-import { formatRegions } from '../lib/utils';
+import { formatRegions } from '../utils/formatting';
 import AccountForm from '../components/forms/AccountForm';
 import toast, { Toaster } from 'react-hot-toast';
 

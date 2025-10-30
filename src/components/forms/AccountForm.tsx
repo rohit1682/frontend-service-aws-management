@@ -4,48 +4,24 @@ import { X, Check, Upload, AlertCircle, User, Hash, MapPin, Image as ImageIcon }
 import type { Account } from '../../constants/accounts';
 import { AWS_REGIONS } from '../../constants/regions';
 import MultiRegionSelector from '../ui/MultiRegionSelector';
+import type { AccountFormProps, AccountFormData, AccountFormErrors } from '../../interfaces/forms/accountForm.interfaces';
+import { validateAccountForm, parseActiveRegions } from '../../utils/validations/accountForm.validation';
 
-interface AccountFormProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: (accountData: {
-        accountName: string;
-        accountId: string;
-        activeRegions: string[];
-        logoFile?: File;
-    }) => Promise<void>;
-    account?: Account;
-    title: string;
-    mode: 'create' | 'update';
-}
+
 
 const AccountForm: React.FC<AccountFormProps> = memo(({ isOpen, onClose, onSubmit, account, title, mode }) => {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<AccountFormData>({
         accountName: account?.AccountName || '',
         accountId: account?.AccountID || '',
-        activeRegions: [] as string[]
+        activeRegions: []
     });
 
     const [logoFile, setLogoFile] = useState<File | null>(null);
     const [logoPreview, setLogoPreview] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errors, setErrors] = useState<Record<string, string>>({});
+    const [errors, setErrors] = useState<AccountFormErrors>({});
 
-    // Parse ActiveRegions from account data
-    const parseActiveRegions = (activeRegions?: string): string[] => {
-        if (!activeRegions || activeRegions.trim() === '') return [];
 
-        try {
-            // Try to parse as JSON array first
-            const parsed = JSON.parse(activeRegions);
-            if (Array.isArray(parsed)) return parsed;
-        } catch {
-            // If not JSON, treat as comma-separated string
-            return activeRegions.split(',').map(r => r.trim()).filter(r => r);
-        }
-
-        return [activeRegions];
-    };
 
     // Reset form when account changes
     useEffect(() => {
@@ -76,40 +52,16 @@ const AccountForm: React.FC<AccountFormProps> = memo(({ isOpen, onClose, onSubmi
         }
     };
 
-    const validateForm = () => {
-        const newErrors: Record<string, string> = {};
-
-        // Simple validation
-        if (!formData.accountName.trim()) {
-            newErrors.accountName = 'Account name is required';
-        } else if (formData.accountName.length < 2) {
-            newErrors.accountName = 'Account name must be at least 2 characters';
-        }
-
-        if (mode === 'create') {
-            if (!formData.accountId.trim()) {
-                newErrors.accountId = 'Account ID is required';
-            } else if (!/^\d{12}$/.test(formData.accountId)) {
-                newErrors.accountId = 'Account ID must be exactly 12 digits';
-            }
-        }
-
-        if (formData.activeRegions.length === 0) {
-            newErrors.activeRegions = 'At least one region must be selected';
-        }
-
-        if (logoFile && logoFile.size > 2 * 1024 * 1024) {
-            newErrors.logo = 'Logo file must be less than 2MB';
-        }
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+    const validateFormData = () => {
+        const validationResult = validateAccountForm(formData, mode, logoFile);
+        setErrors(validationResult.errors);
+        return validationResult.isValid;
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!validateForm()) {
+        if (!validateFormData()) {
             return;
         }
 

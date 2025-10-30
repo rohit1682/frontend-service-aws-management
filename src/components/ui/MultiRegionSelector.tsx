@@ -1,24 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown, MapPin, Check, Search, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-interface Region {
-    name: string;
-    code: string;
-}
-
-interface RegionGroup {
-    [key: string]: Region[];
-}
-
-interface MultiRegionSelectorProps {
-    regionGroups: RegionGroup;
-    selectedRegions: string[];
-    onRegionsChange: (regions: string[]) => void;
-    placeholder?: string;
-    className?: string;
-    error?: boolean;
-}
+import type { Region, RegionGroup, MultiRegionSelectorProps } from '../../interfaces/components/dropdown.interfaces';
 
 const MultiRegionSelector: React.FC<MultiRegionSelectorProps> = ({
     regionGroups,

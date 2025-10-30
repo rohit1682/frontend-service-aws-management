@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import type { PropsWithChildren } from 'react'
 import NavOptions from '../components/navigation/NavOptions'
-import { useAuth } from '../context/AuthContext'
+import { useAuthWithNavigation } from '../hooks/useAuthWithNavigation'
 import { type NavItem } from '../types'
 import LogoImage from '../assets/Logo.png'
 
 function SidebarLayout({ children }: PropsWithChildren) {
   const [open, setOpen] = useState(true)
-  const { isAuthenticated, logout } = useAuth()
+  const { isAuthenticated, logout } = useAuthWithNavigation()
 
   return (
     <div className="min-h-screen relative bg-white">
